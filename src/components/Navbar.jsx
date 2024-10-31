@@ -1,4 +1,4 @@
-// frontend/src/components/Navbar.jsx
+// src/components/Navbar.jsx
 
 import React from 'react';
 import { Link } from 'react-router-dom';
@@ -9,6 +9,9 @@ function Navbar() {
       <Link to="/">
         <h1>CryptoStats</h1>
       </Link>
+      <div className="nav-links">
+        <Link to="/compare">Compare Cryptos</Link>
+      </div>
     </div>
   );
 }

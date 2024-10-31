@@ -1,0 +1,63 @@
+/* src/pages/Compare.css */
+
+.compare-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .crypto-selection {
+    margin-bottom: 20px;
+  }
+  
+  .crypto-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  
+  .checkbox-label {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+  }
+  
+  .checkbox-label input {
+    margin-right: 5px;
+  }
+  
+  .comparison-table {
+    overflow-x: auto;
+  }
+  
+  .comparison-table table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .comparison-table th,
+  .comparison-table td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  .comparison-table th {
+    background-color: #1e1e1e;
+  }
+  
+  .comparison-table tr:nth-child(even) {
+    background-color: #1e1e1e;
+  }
+  
+  .comparison-table img {
+    display: block;
+    margin: 0 auto 5px;
+  }
+  
+  @media (max-width: 768px) {
+    .crypto-options {
+      flex-direction: column;
+    }
+  }
+  
