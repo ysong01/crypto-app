@@ -5,7 +5,8 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import CryptoStats from './pages/CryptoStats';
-import Compare from './pages/Compare'; // Import the Compare component
+import Compare from './pages/Compare';
+import Chatbot from './components/Chatbot';
 
 function App() {
   return (
@@ -14,8 +15,9 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/crypto/:name" element={<CryptoStats />} />
-        <Route path="/compare" element={<Compare />} /> {/* Add the new route */}
+        <Route path="/compare" element={<Compare />} />
       </Routes>
+      <Chatbot />
     </Router>
   );
 }

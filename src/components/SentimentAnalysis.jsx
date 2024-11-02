@@ -106,7 +106,10 @@ const options = {
     rotationAngles: [-90, 0],
     fontSizes: [15, 60],
     fontFamily: 'Poppins', // Specify the font family
-    // Add more customization options as needed
+    colors: ['#ffffff'], // Set all words to white
+    enableTooltip: true,
+    deterministic: true,
+    padding: 3,
   };
   
   return (
