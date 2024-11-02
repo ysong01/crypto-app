@@ -13,19 +13,17 @@ function Home() {
   useEffect(() => {
     const fetchCryptoData = async () => {
       try {
-        // Create an array of promises for each cryptocurrency
         const promises = cryptocurrencies.map(crypto => 
           axios.get(`https://stingray-app-prmsm.ondigitalocean.app/api/${crypto.code.toLowerCase()}`)
         );
         
-        // Wait for all requests to complete
         const responses = await Promise.all(promises);
         
-        // Create an object with the crypto data
         const data = responses.reduce((acc, response, index) => {
           acc[cryptocurrencies[index].code] = {
             price: response.data.market_price_usd,
-            transactions: response.data.transactions_24h
+            transactions: response.data.transactions_24h,
+            priceChange: response.data.market_price_usd_change_24h_percentage
           };
           return acc;
         }, {});
@@ -38,13 +36,8 @@ function Home() {
       }
     };
 
-    // Initial fetch
     fetchCryptoData();
-
-    // Set up polling every 30 seconds
     const interval = setInterval(fetchCryptoData, 30000);
-
-    // Cleanup interval on component unmount
     return () => clearInterval(interval);
   }, []);
 
@@ -65,7 +58,14 @@ function Home() {
                     alt={crypto.name}
                     width="50"
                   />
-                  <h3>{crypto.name}</h3>
+                  <div className="name-price-change">
+                    <h3>{crypto.name}</h3>
+                    {!loading && liveData.priceChange !== undefined && (
+                      <span className={`price-change ${liveData.priceChange >= 0 ? 'positive' : 'negative'}`}>
+                        {liveData.priceChange >= 0 ? '+' : ''}{liveData.priceChange.toFixed(2)}%
+                      </span>
+                    )}
+                  </div>
                 </div>
                 
                 <div className="crypto-details">
