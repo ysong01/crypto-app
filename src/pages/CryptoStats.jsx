@@ -98,6 +98,13 @@ function CryptoStats() {
     dash: 'BITTREX:DASHUSD|1D',
     monero: 'KRAKEN:XMRUSD|1D',
     cardano: 'BINANCE:ADAUSDT|1D',
+    ripple: 'BITSTAMP:XRPUSD|1D',
+    stellar: 'BINANCE:XLMUSDT|1D',
+    polkadot: 'BINANCE:DOTUSD|1D',
+    kusama: 'BINANCE:KSMUSDT|1D',
+    zcash: 'BINANCE:ZECUSDT|1D',
+    ecash: 'BINANCE:XECUSDT|1D',
+    groestlcoin: 'BINANCE:GRSUSDT|1D',
   };
 
   const symbol = tradingViewSymbols[name];

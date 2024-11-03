@@ -16,7 +16,11 @@ function SentimentAnalysis({ crypto }) {
         const response = await axios.get(
           `https://stingray-app-prmsm.ondigitalocean.app/api/sentiment/${crypto}`
         );
-        setSentimentData(response.data);
+        if (response.data && typeof response.data.averageScore === 'number') {
+          setSentimentData(response.data);
+        } else {
+          setError('No sentiment data available for this cryptocurrency.');
+        }
       } catch (error) {
         console.error('Error fetching sentiment data:', error);
         setError('Failed to fetch sentiment data.');
@@ -42,7 +46,10 @@ function SentimentAnalysis({ crypto }) {
       ) : (
         <>
           <p>
-            <strong>Average Sentiment Score:</strong> {sentimentData.averageScore.toFixed(2)} (
+            <strong>Average Sentiment Score:</strong>{' '}
+            {sentimentData.averageScore != null 
+              ? sentimentData.averageScore.toFixed(2)
+              : 'N/A'} (
             {sentimentData.averageScore > 0
               ? 'Positive'
               : sentimentData.averageScore < 0
@@ -51,26 +58,37 @@ function SentimentAnalysis({ crypto }) {
             )
           </p>
           <p>
-            <strong>Posts Analyzed:</strong> {sentimentData.postsAnalyzed}
+            <strong>Posts Analyzed:</strong>{' '}
+            {sentimentData.postsAnalyzed || 'N/A'}
           </p>
 
           {/* Analyzed Posts List */}
-          <h4>Analyzed Posts</h4>
-          <ul className="posts-list">
-            {sentimentData.results.map((post, index) => (
-              <li key={index} className="post-item">
-                <p className="post-title">{post.title}</p>
-                <p className="post-score">
-                  Score: {post.score} (
-                  {post.score > 0 ? 'Positive' : post.score < 0 ? 'Negative' : 'Neutral'})
-                </p>
-              </li>
-            ))}
-          </ul>
+          {sentimentData.results && sentimentData.results.length > 0 ? (
+            <>
+              <h4>Analyzed Posts</h4>
+              <ul className="posts-list">
+                {sentimentData.results.map((post, index) => (
+                  <li key={index} className="post-item">
+                    <p className="post-title">{post.title}</p>
+                    <p className="post-score">
+                      Score: {post.score != null ? post.score : 'N/A'} (
+                      {post.score > 0 
+                        ? 'Positive' 
+                        : post.score < 0 
+                        ? 'Negative' 
+                        : 'Neutral'})
+                    </p>
+                  </li>
+                ))}
+              </ul>
 
-          {/* Word Cloud Visualization */}
-          <h4>Word Cloud</h4>
-          <WordCloud cryptoData={sentimentData.results} />
+              {/* Word Cloud Visualization */}
+              <h4>Word Cloud</h4>
+              <WordCloud cryptoData={sentimentData.results} />
+            </>
+          ) : (
+            <p>No sentiment analysis results available.</p>
+          )}
         </>
       )}
     </div>
@@ -79,6 +97,10 @@ function SentimentAnalysis({ crypto }) {
 
 // Separate component for Word Cloud to keep SentimentAnalysis clean
 function WordCloud({ cryptoData }) {
+  if (!Array.isArray(cryptoData) || cryptoData.length === 0) {
+    return <div>No data available for word cloud visualization.</div>;
+  }
+
   // Prepare words data from post titles
   const words = cryptoData
     .flatMap((post) => post.title.split(' '))
