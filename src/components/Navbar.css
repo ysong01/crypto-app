@@ -5,6 +5,7 @@
     align-items: center;
     padding: 10px 20px;
     background-color: #1e1e1e;
+    overflow: visible;
   }
   
   .navbar h1 {
@@ -26,5 +27,113 @@
   .navbar .nav-link:hover {
     color: #00bcd4;
     transition: color 0.3s ease;
+  }
+  
+  .logout-btn {
+    background: #dc3545;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .logout-btn:hover {
+    background: #c82333;
+    transform: scale(1.05);
+  }
+  
+  .login-btn {
+    background: #007bff;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 16px;
+  }
+  
+  .login-btn:hover {
+    background: #0056b3;
+    text-decoration: none;
+    transform: scale(1.05);
+  }
+  
+  .nav-item {
+    position: relative;
+    display: inline-block;
+    padding-bottom: 35px;
+  }
+  
+  .tooltip {
+    visibility: hidden;
+    position: absolute;
+    bottom: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #333;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 14px;
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.3s, visibility 0.3s;
+    width: max-content;
+    white-space: normal;
+    min-width: fit-content;
+  }
+  
+  .tooltip::before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 0 5px 5px 5px;
+    border-style: solid;
+    border-color: transparent transparent #333 transparent;
+  }
+  
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+  }
+  
+  .nav-item:last-child .tooltip {
+    bottom: -35px;
+    right: 0;
+    left: auto;
+    transform: none;
+    text-align: right;
+    padding-right: 15px;
+    min-width: 150px;
+  }
+  
+  .nav-item:last-child .tooltip::before {
+    left: auto;
+    right: 20px;
+    transform: none;
+  }
+  
+  .nav-item:hover .tooltip {
+    visibility: visible;
+    opacity: 1;
+  }
+  
+  .nav-item a, 
+  .nav-item button {
+    font-size: 16px;
+    padding: 10px 20px;
+    text-decoration: none;
+    color: white;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+  }
+  
+  .nav-item a:hover {
+    color: #00bcd4;
+    transform: scale(1.05);
   }
   

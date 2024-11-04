@@ -1,0 +1,1 @@
+const AUTH_API = 'https://hammerhead-app-cpxzd.ondigitalocean.app/api/auth'; 
