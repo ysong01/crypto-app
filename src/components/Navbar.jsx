@@ -24,31 +24,31 @@ function Navbar() {
       <div className="nav-links">
         <div className="nav-item">
           <Link to="/">Home</Link>
-          <span className="tooltip">View latest crypto trends and analysis</span>
+          <span className="navbar-tooltip">View latest crypto trends and analysis</span>
         </div>
         
         <div className="nav-item">
           <Link to="/compare">Compare</Link>
-          <span className="tooltip">Compare different cryptocurrencies</span>
+          <span className="navbar-tooltip">Compare different cryptocurrencies</span>
         </div>
         
         {user ? (
           <>
             <div className="nav-item">
               <Link to="/portfolio/manage">Portfolio</Link>
-              <span className="tooltip">Manage your crypto portfolio</span>
+              <span className="navbar-tooltip">Manage your crypto portfolio</span>
             </div>
             <div className="nav-item">
               <button onClick={handleLogout} className="logout-btn">
                 Logout ({user.username})
               </button>
-              <span className="tooltip">Sign out of your account</span>
+              <span className="navbar-tooltip">Sign out of your account</span>
             </div>
           </>
         ) : (
           <div className="nav-item">
             <Link to="/portfolio" className="login-btn">Login</Link>
-            <span className="tooltip">Create an account or sign in to analyze your portfolio</span>
+            <span className="navbar-tooltip">Create an account or sign in to analyze your portfolio</span>
           </div>
         )}
       </div>

@@ -1,0 +1,81 @@
+.crypto-metric-card {
+  background: #2a2a2a;
+  border-radius: 12px;
+  padding: 20px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  position: relative;
+}
+
+.crypto-metric-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  background: #323232;
+}
+
+.metric-header {
+  position: relative;
+  display: inline-block;
+}
+
+.metric-header h4 {
+  color: #8a8f98;
+  font-size: 0.9rem;
+  margin: 0;
+  font-weight: 500;
+  cursor: help;
+}
+
+.crypto-metric-card .value {
+  color: #ffffff;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.tooltip {
+  visibility: hidden;
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #333;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-size: 14px;
+  white-space: normal;
+  width: 200px;
+  text-align: center;
+  z-index: 1000;
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+
+.tooltip::before {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 5px;
+  border-style: solid;
+  border-color: #333 transparent transparent transparent;
+}
+
+.metric-header:hover .tooltip {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Mobile responsiveness */
+@media screen and (max-width: 768px) {
+  .tooltip {
+    width: 150px;
+    font-size: 12px;
+  }
+}

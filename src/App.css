@@ -36,3 +36,26 @@
     transform: rotate(360deg);
   }
 }
+
+/* General mobile responsiveness */
+@media screen and (max-width: 768px) {
+  .container {
+    padding: 10px;
+  }
+
+  button, 
+  input, 
+  select {
+    width: 100%;
+    margin: 5px 0;
+  }
+
+  table {
+    display: block;
+    overflow-x: auto;
+  }
+
+  .metric-card {
+    padding: 15px;
+  }
+}

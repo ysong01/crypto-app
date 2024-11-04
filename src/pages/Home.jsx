@@ -9,6 +9,10 @@ import './Home.css';
 function Home() {
   const [cryptoData, setCryptoData] = useState({});
   const [loading, setLoading] = useState(true);
+  const [aggregateStats, setAggregateStats] = useState({
+    totalPercentageChange: 0,
+    totalTransactions24h: 0
+  });
 
   useEffect(() => {
     const fetchCryptoData = async () => {
@@ -20,15 +24,34 @@ function Home() {
         const responses = await Promise.all(promises);
         
         const data = responses.reduce((acc, response, index) => {
+          const priceChange = response.data.market_price_usd_change_24h_percentage;
+          
+          // Log each crypto's price change
+          console.log(`${cryptocurrencies[index].name}: ${priceChange}%`);
+          
           acc[cryptocurrencies[index].code] = {
             price: response.data.market_price_usd,
             transactions: response.data.transactions_24h,
-            priceChange: response.data.market_price_usd_change_24h_percentage
+            priceChange: priceChange
           };
           return acc;
         }, {});
         
         setCryptoData(data);
+
+        // Calculate totals only for the listed cryptocurrencies
+        const totals = cryptocurrencies.reduce((acc, crypto) => {
+          const cryptoData = data[crypto.code];
+          return {
+            totalPercentageChange: acc.totalPercentageChange + (cryptoData?.priceChange || 0),
+            totalTransactions24h: acc.totalTransactions24h + (cryptoData?.transactions || 0)
+          };
+        }, { totalPercentageChange: 0, totalTransactions24h: 0 });
+
+        // Log the final total
+        console.log('Total percentage change:', totals.totalPercentageChange);
+        
+        setAggregateStats(totals);
       } catch (error) {
         console.error('Error fetching crypto data:', error);
       } finally {
@@ -43,7 +66,28 @@ function Home() {
 
   return (
     <div className="container">
-      <h2>Select a Cryptocurrency</h2>
+      <div className="home-header">
+        <div className="title-section">
+          <h2>Select a Cryptocurrency</h2>
+        </div>
+        <div className="aggregate-stats">
+          <div className="stat-item">
+            <span className="stat-label">Total % Change (24h)</span>
+            <span className={`stat-value ${aggregateStats.totalPercentageChange >= 0 ? 'positive' : 'negative'}`}>
+              {aggregateStats.totalPercentageChange >= 0 ? '+' : ''}
+              {aggregateStats.totalPercentageChange.toFixed(2)}%
+            </span>
+            <span className="stat-tooltip">Combined percentage change of all listed cryptocurrencies in the last 24 hours</span>
+          </div>
+          <div className="stat-item">
+            <span className="stat-label">Total Transactions (24h)</span>
+            <span className="stat-value">
+              {aggregateStats.totalTransactions24h.toLocaleString()}
+            </span>
+            <span className="stat-tooltip">Combined number of transactions across all listed cryptocurrencies in the last 24 hours</span>
+          </div>
+        </div>
+      </div>
 
       <div className="card-grid">
         {cryptocurrencies.map((crypto) => {

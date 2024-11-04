@@ -40,51 +40,77 @@ function SentimentAnalysis({ crypto }) {
 
   return (
     <div className="sentiment-container">
-      <h3>Social Sentiment Analysis</h3>
+      <div className="sentiment-header">
+        <h3>Social Sentiment Analysis</h3>
+      </div>
+      
       {sentimentData.message ? (
         <p>{sentimentData.message}</p>
       ) : (
         <>
-          <p>
-            <strong>Average Sentiment Score:</strong>{' '}
-            {sentimentData.averageScore != null 
-              ? sentimentData.averageScore.toFixed(2)
-              : 'N/A'} (
-            {sentimentData.averageScore > 0
-              ? 'Positive'
-              : sentimentData.averageScore < 0
-              ? 'Negative'
-              : 'Neutral'}
-            )
-          </p>
-          <p>
-            <strong>Posts Analyzed:</strong>{' '}
-            {sentimentData.postsAnalyzed || 'N/A'}
-          </p>
+          <div className="sentiment-overview">
+            <div className="sentiment-stat">
+              <strong>Average Sentiment Score</strong>
+              <div className="sentiment-value">
+                {sentimentData.averageScore != null 
+                  ? sentimentData.averageScore.toFixed(2)
+                  : 'N/A'}
+                <span className={`score-indicator ${
+                  sentimentData.averageScore > 0 
+                    ? 'score-positive' 
+                    : sentimentData.averageScore < 0 
+                    ? 'score-negative' 
+                    : 'score-neutral'
+                }`}>
+                  {sentimentData.averageScore > 0
+                    ? 'Positive'
+                    : sentimentData.averageScore < 0
+                    ? 'Negative'
+                    : 'Neutral'}
+                </span>
+              </div>
+            </div>
+            <div className="sentiment-stat">
+              <strong>Posts Analyzed</strong>
+              <div className="sentiment-value">
+                {sentimentData.postsAnalyzed || 'N/A'}
+              </div>
+            </div>
+          </div>
 
-          {/* Analyzed Posts List */}
           {sentimentData.results && sentimentData.results.length > 0 ? (
             <>
-              <h4>Analyzed Posts</h4>
-              <ul className="posts-list">
-                {sentimentData.results.map((post, index) => (
-                  <li key={index} className="post-item">
-                    <p className="post-title">{post.title}</p>
-                    <p className="post-score">
-                      Score: {post.score != null ? post.score : 'N/A'} (
-                      {post.score > 0 
-                        ? 'Positive' 
-                        : post.score < 0 
-                        ? 'Negative' 
-                        : 'Neutral'})
-                    </p>
-                  </li>
-                ))}
-              </ul>
+              <div className="posts-section">
+                <h4>Analyzed Posts</h4>
+                <ul className="posts-list">
+                  {sentimentData.results.map((post, index) => (
+                    <li key={index} className="post-item">
+                      <p className="post-title">{post.title}</p>
+                      <p className="post-score">
+                        Score: {post.score != null ? post.score.toFixed(2) : 'N/A'}
+                        <span className={`score-indicator ${
+                          post.score > 0 
+                            ? 'score-positive' 
+                            : post.score < 0 
+                            ? 'score-negative' 
+                            : 'score-neutral'
+                        }`}>
+                          {post.score > 0 
+                            ? 'Positive' 
+                            : post.score < 0 
+                            ? 'Negative' 
+                            : 'Neutral'}
+                        </span>
+                      </p>
+                    </li>
+                  ))}
+                </ul>
+              </div>
 
-              {/* Word Cloud Visualization */}
-              <h4>Word Cloud</h4>
-              <WordCloud cryptoData={sentimentData.results} />
+              <div className="wordcloud-section">
+                <h4>Word Cloud</h4>
+                <WordCloud cryptoData={sentimentData.results} />
+              </div>
             </>
           ) : (
             <p>No sentiment analysis results available.</p>

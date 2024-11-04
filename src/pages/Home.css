@@ -121,3 +121,99 @@ a {
 .price-change.negative {
   color: #ff4d4d;
 }
+
+.home-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  padding: 20px;
+  background: #2a2a2a;
+  border-radius: 12px;
+}
+
+.title-section h2 {
+  margin: 0;
+  color: #fff;
+}
+
+.aggregate-stats {
+  display: flex;
+  gap: 30px;
+}
+
+.stat-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.stat-label {
+  color: #8a8f98;
+  font-size: 0.9rem;
+}
+
+.stat-value {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+.stat-value.positive {
+  color: #28a745;
+}
+
+.stat-value.negative {
+  color: #dc3545;
+}
+
+.stat-tooltip {
+  visibility: hidden;
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #333;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-size: 14px;
+  white-space: nowrap;
+  z-index: 1000;
+  opacity: 0;
+  transition: opacity 0.3s;
+  margin-bottom: 10px;
+  width: max-content;
+}
+
+.stat-tooltip::before {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 5px;
+  border-style: solid;
+  border-color: #333 transparent transparent transparent;
+}
+
+.stat-item:hover .stat-tooltip {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Mobile responsiveness */
+@media screen and (max-width: 768px) {
+  .home-header {
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+  }
+
+  .aggregate-stats {
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+  }
+}
