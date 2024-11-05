@@ -77,26 +77,10 @@
   padding: 10px;
 }
 
-/* Remove default link styling */
 a {
   text-decoration: none;
   color: inherit;
 }
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  .card-grid {
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 15px;
-    padding: 10px;
-  }
-
-  .crypto-card {
-    padding: 15px;
-  }
-}
-
-/* Add these new styles to your existing CSS */
 
 .name-price-change {
   display: flex;
@@ -135,6 +119,25 @@ a {
 .title-section h2 {
   margin: 0;
   color: #fff;
+  font-size: 1.8rem;
+  font-weight: 600;
+  position: relative;
+  padding-bottom: 10px;
+}
+
+.title-section h2::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, #00bcd4, #4CAF50);
+  transition: width 0.3s ease;
+}
+
+.title-section h2:hover::after {
+  width: 100px;
 }
 
 .aggregate-stats {
@@ -144,9 +147,6 @@ a {
 
 .stat-item {
   position: relative;
-  display: flex;
-  align-items: center;
-  gap: 10px;
 }
 
 .stat-label {
@@ -168,41 +168,6 @@ a {
   color: #dc3545;
 }
 
-.stat-tooltip {
-  visibility: hidden;
-  position: absolute;
-  bottom: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: #333;
-  color: white;
-  padding: 8px 12px;
-  border-radius: 4px;
-  font-size: 14px;
-  white-space: nowrap;
-  z-index: 1000;
-  opacity: 0;
-  transition: opacity 0.3s;
-  margin-bottom: 10px;
-  width: max-content;
-}
-
-.stat-tooltip::before {
-  content: '';
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  border-width: 5px;
-  border-style: solid;
-  border-color: #333 transparent transparent transparent;
-}
-
-.stat-item:hover .stat-tooltip {
-  visibility: visible;
-  opacity: 1;
-}
-
 /* Mobile responsiveness */
 @media screen and (max-width: 768px) {
   .home-header {
@@ -216,4 +181,35 @@ a {
     align-items: center;
     gap: 15px;
   }
+
+  .card-grid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 15px;
+    padding: 10px;
+  }
+
+  .crypto-card {
+    padding: 15px;
+  }
+}
+
+/* More specific selectors to disable tooltips on home page */
+.container .home-header .stat-item .tooltip,
+.container .home-header .stat-item::before,
+.container .home-header .stat-item::after,
+.container .home-header .tooltip,
+.container .home-header [title]::before,
+.container .home-header [title]::after {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* Remove any hover effects related to tooltips */
+.container .home-header .stat-item:hover .tooltip,
+.container .home-header:hover .tooltip {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
 }

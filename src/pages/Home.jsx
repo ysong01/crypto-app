@@ -72,19 +72,17 @@ function Home() {
         </div>
         <div className="aggregate-stats">
           <div className="stat-item">
-            <span className="stat-label">Total % Change (24h)</span>
+            <span className="stat-label">Total % Change</span>
             <span className={`stat-value ${aggregateStats.totalPercentageChange >= 0 ? 'positive' : 'negative'}`}>
               {aggregateStats.totalPercentageChange >= 0 ? '+' : ''}
               {aggregateStats.totalPercentageChange.toFixed(2)}%
             </span>
-            <span className="stat-tooltip">Combined percentage change of all listed cryptocurrencies in the last 24 hours</span>
           </div>
           <div className="stat-item">
             <span className="stat-label">Total Transactions (24h)</span>
             <span className="stat-value">
               {aggregateStats.totalTransactions24h.toLocaleString()}
             </span>
-            <span className="stat-tooltip">Combined number of transactions across all listed cryptocurrencies in the last 24 hours</span>
           </div>
         </div>
       </div>

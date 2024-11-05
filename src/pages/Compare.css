@@ -1,63 +1,207 @@
 /* src/pages/Compare.css */
 
+.container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Title styling */
+.container h2 {
+  color: #fff;
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 30px;
+  position: relative;
+  padding-bottom: 15px;
+}
+
+.container h2::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, #00bcd4, #4CAF50);
+  transition: width 0.3s ease;
+}
+
+.container h2:hover::after {
+  width: 120px;
+}
+
 .compare-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .crypto-selection {
-    margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  background: #1a1d23;
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Crypto selection section */
+.crypto-selection {
+  background: #2a2d35;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.crypto-selection h3 {
+  color: #fff;
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #454545;
+}
+
+.crypto-options {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 15px;
+  padding: 10px;
+}
+
+/* Checkbox styling */
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px;
+  background: #1a1d23;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 1px solid #454545;
+}
+
+.checkbox-label:hover {
+  transform: translateY(-2px);
+  background: #2a2d35;
+  border-color: #00bcd4;
+}
+
+.checkbox-label input[type="checkbox"] {
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border: 2px solid #454545;
+  border-radius: 4px;
+  background: #1a1d23;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.checkbox-label input[type="checkbox"]:checked {
+  background: #00bcd4;
+  border-color: #00bcd4;
+}
+
+.checkbox-label input[type="checkbox"]:checked::after {
+  content: '✓';
+  position: absolute;
+  color: #fff;
+  font-size: 12px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.checkbox-label img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+/* Comparison table styling */
+.comparison-table {
+  overflow-x: auto;
+  background: #2a2d35;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.comparison-table table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  color: #fff;
+}
+
+.comparison-table th,
+.comparison-table td {
+  padding: 15px;
+  text-align: center;
+  border-bottom: 1px solid #454545;
+}
+
+.comparison-table th {
+  background: #1a1d23;
+  font-weight: 600;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.comparison-table th:first-child {
+  border-top-left-radius: 8px;
+}
+
+.comparison-table th:last-child {
+  border-top-right-radius: 8px;
+}
+
+.comparison-table tr:hover td {
+  background: #323642;
+}
+
+.comparison-table td:first-child {
+  font-weight: 500;
+  color: #8a8f98;
+  text-align: left;
+}
+
+.comparison-table img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  margin-bottom: 8px;
+  transition: transform 0.3s ease;
+}
+
+.comparison-table th:hover img {
+  transform: scale(1.1);
+}
+
+/* Loading state */
+.loading {
+  text-align: center;
+  padding: 20px;
+  color: #8a8f98;
+  font-size: 1.1rem;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .container {
+    padding: 10px;
   }
   
   .crypto-options {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-  }
-  
-  .checkbox-label {
-    display: flex;
-    align-items: center;
-    margin-right: 10px;
-  }
-  
-  .checkbox-label input {
-    margin-right: 5px;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   }
   
   .comparison-table {
-    overflow-x: auto;
+    margin: 0 -10px;
+    border-radius: 0;
   }
   
-  .comparison-table table {
-    width: 100%;
-    border-collapse: collapse;
+  .checkbox-label {
+    font-size: 0.9rem;
   }
-  
-  .comparison-table th,
-  .comparison-table td {
-    border: 1px solid #ccc;
-    padding: 10px;
-    text-align: center;
-  }
-  
-  .comparison-table th {
-    background-color: #1e1e1e;
-  }
-  
-  .comparison-table tr:nth-child(even) {
-    background-color: #1e1e1e;
-  }
-  
-  .comparison-table img {
-    display: block;
-    margin: 0 auto 5px;
-  }
-  
-  @media (max-width: 768px) {
-    .crypto-options {
-      flex-direction: column;
-    }
-  }
+}
   

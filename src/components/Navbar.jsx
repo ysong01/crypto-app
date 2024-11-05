@@ -38,13 +38,21 @@ function Navbar() {
               <Link to="/portfolio/manage">Portfolio</Link>
               <span className="navbar-tooltip">Manage your crypto portfolio</span>
             </div>
-            <div className="nav-item">
-              <button onClick={handleLogout} className="logout-btn">
-                Logout ({user.username})
-              </button>
-              <span className="navbar-tooltip">Sign out of your account</span>
-            </div>
           </>
+        ) : null}
+
+        <div className="nav-item">
+          <Link to="/monitor">Monitor</Link>
+          <span className="navbar-tooltip">Real-time blockchain monitoring</span>
+        </div>
+
+        {user ? (
+          <div className="nav-item">
+            <button onClick={handleLogout} className="logout-btn">
+              Logout ({user.username})
+            </button>
+            <span className="navbar-tooltip">Sign out of your account</span>
+          </div>
         ) : (
           <div className="nav-item">
             <Link to="/portfolio" className="login-btn">Login</Link>

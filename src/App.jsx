@@ -10,6 +10,7 @@ import Chatbot from './components/Chatbot';
 import PortfolioLogin from './components/Portfolio/PortfolioLogin';
 import PortfolioManager from './components/Portfolio/PortfolioManager';
 import ProtectedRoute from './components/ProtectedRoute';
+import BlockchainMonitor from './pages/BlockchainMonitor';
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
             </ProtectedRoute>
           } 
         />
+        <Route path="/monitor" element={<BlockchainMonitor />} />
       </Routes>
       <Chatbot />
     </Router>

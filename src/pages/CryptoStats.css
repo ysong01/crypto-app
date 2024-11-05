@@ -1,0 +1,259 @@
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+.crypto-card {
+  background: linear-gradient(145deg, #1a1d23, #2a2d35);
+  border-radius: 12px;
+  padding: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  cursor: help;
+}
+
+.crypto-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  border-color: rgba(0, 188, 212, 0.3);
+}
+
+/* Glow effect on hover */
+.crypto-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    circle at center,
+    rgba(0, 188, 212, 0.1) 0%,
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.crypto-card:hover::before {
+  opacity: 1;
+}
+
+.crypto-card .title {
+  color: #8a8f98;
+  font-size: 0.9rem;
+  margin-bottom: 15px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+  padding-bottom: 8px;
+}
+
+.crypto-card .title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 40px;
+  height: 2px;
+  background: linear-gradient(90deg, #00bcd4, #4CAF50);
+  transition: width 0.3s ease;
+  opacity: 1;
+}
+
+.crypto-card:hover .title::after {
+  width: 100%;
+}
+
+.crypto-card.price .title::after {
+  background: linear-gradient(90deg, #00bcd4, #00e5ff);
+}
+
+.crypto-card.volume .title::after {
+  background: linear-gradient(90deg, #4CAF50, #8BC34A);
+}
+
+.crypto-card.market .title::after {
+  background: linear-gradient(90deg, #2196F3, #03A9F4);
+}
+
+.crypto-card.transaction .title::after {
+  background: linear-gradient(90deg, #9C27B0, #E91E63);
+}
+
+.crypto-card.ratio .title::after {
+  background: linear-gradient(90deg, #FF9800, #FFC107);
+}
+
+.crypto-card .value {
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-top: 10px;
+}
+
+/* Tooltip styling */
+.crypto-card {
+  position: relative;
+  cursor: help;
+}
+
+.crypto-card .tooltip {
+  visibility: hidden;
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.9);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  white-space: normal;
+  width: 200px;
+  text-align: center;
+  z-index: 1000;
+  opacity: 0;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  pointer-events: none;
+  margin-bottom: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.crypto-card:hover .tooltip {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Different accent colors for different card types */
+.crypto-card.price { border-left: 3px solid #00bcd4; }
+.crypto-card.volume { border-left: 3px solid #4CAF50; }
+.crypto-card.market { border-left: 3px solid #2196F3; }
+.crypto-card.transaction { border-left: 3px solid #9C27B0; }
+.crypto-card.ratio { border-left: 3px solid #FF9800; }
+
+/* Crypto header styling */
+.crypto-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 30px;
+  padding: 20px;
+  background: #2a2a2a;
+  border-radius: 12px;
+}
+
+.crypto-header h2 {
+  margin: 0;
+  color: #fff;
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+
+.crypto-header img {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+}
+
+/* Update the tooltip section */
+.metric-header {
+  position: relative;
+  cursor: help;
+  margin-bottom: 15px;
+}
+
+.metric-header .tooltip {
+  visibility: hidden;
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.9);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  white-space: normal;
+  width: 200px;
+  text-align: center;
+  z-index: 1000;
+  opacity: 0;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  pointer-events: none;
+  margin-bottom: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.metric-header:hover .tooltip {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Add a small arrow to the tooltip */
+.metric-header .tooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: rgba(0, 0, 0, 0.9) transparent transparent transparent;
+}
+
+/* Update the title and line gradient styles */
+.metric-header .title {
+  color: #8a8f98;
+  font-size: 0.9rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+  padding-bottom: 8px;
+}
+
+/* Add the gradient line */
+.metric-header .title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 40px;
+  height: 2px;
+  background: linear-gradient(90deg, #00bcd4, #4CAF50);
+  transition: width 0.3s ease;
+}
+
+/* Extend line on hover */
+.crypto-card:hover .metric-header .title::after {
+  width: 100%;
+}
+
+/* Different gradient colors for different card types */
+.crypto-card.price .metric-header .title::after {
+  background: linear-gradient(90deg, #00bcd4, #00e5ff);
+}
+
+.crypto-card.volume .metric-header .title::after {
+  background: linear-gradient(90deg, #4CAF50, #8BC34A);
+}
+
+.crypto-card.market .metric-header .title::after {
+  background: linear-gradient(90deg, #2196F3, #03A9F4);
+}
+
+.crypto-card.transaction .metric-header .title::after {
+  background: linear-gradient(90deg, #9C27B0, #E91E63);
+}
+
+.crypto-card.ratio .metric-header .title::after {
+  background: linear-gradient(90deg, #FF9800, #FFC107);
+} 
