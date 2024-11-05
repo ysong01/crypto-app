@@ -1,6 +1,6 @@
 // src/components/Navbar.jsx
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../store/portfolioSlice';
@@ -10,10 +10,15 @@ function Navbar() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { user } = useSelector((state) => state.portfolio);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleLogout = () => {
     dispatch(logout());
     navigate('/');
+  };
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
   };
 
   return (
@@ -21,7 +26,12 @@ function Navbar() {
       <div className="nav-brand">
         <Link to="/">Crypto Analysis</Link>
       </div>
-      <div className="nav-links">
+      <div className="hamburger" onClick={toggleMenu}>
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <div className={`nav-links ${isMenuOpen ? 'active' : ''}`}>
         <div className="nav-item">
           <Link to="/">Home</Link>
           <span className="navbar-tooltip">View latest crypto trends and analysis</span>

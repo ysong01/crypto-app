@@ -133,3 +133,58 @@
   align-items: center;
   gap: 20px;
 }
+
+/* Add these new mobile-specific styles */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  padding: 10px;
+  margin-left: auto;
+}
+
+.hamburger span {
+  display: block;
+  width: 25px;
+  height: 3px;
+  background-color: white;
+  margin: 2px 0;
+  transition: 0.3s;
+}
+
+@media screen and (max-width: 768px) {
+  .hamburger {
+    display: flex;
+  }
+
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    background-color: #1e1e1e;
+    padding: 20px;
+    gap: 10px;
+  }
+
+  .nav-links.active {
+    display: flex;
+  }
+
+  .nav-item {
+    width: 100%;
+  }
+
+  .nav-item a, 
+  .nav-item button {
+    width: 100%;
+    display: block;
+    text-align: left;
+  }
+
+  .navbar-tooltip {
+    display: none;
+  }
+}
