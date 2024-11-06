@@ -83,6 +83,10 @@
   
   .table-container {
     overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin: 0 -20px;
+    padding: 0 20px;
+    width: calc(100% + 40px);
   }
   
   table {
@@ -388,5 +392,63 @@
     
     .tooltip {
       display: none;
+    }
+  }
+  
+  /* Mobile-specific table styles */
+  @media (max-width: 768px) {
+    .transactions-table {
+      padding: 10px;
+      margin: 0 -10px;
+    }
+  
+    .table-container {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+    }
+  
+    /* Set minimum widths for table columns */
+    table {
+      min-width: 800px; /* Ensure table has minimum width to show all content */
+    }
+  
+    th, td {
+      padding: 8px;
+      white-space: nowrap; /* Prevent text wrapping */
+      min-width: 80px; /* Minimum width for each column */
+    }
+  
+    /* Specific column widths */
+    th:nth-child(1), td:nth-child(1) { /* Time column */
+      min-width: 140px;
+    }
+  
+    th:nth-child(2), td:nth-child(2) { /* Value column */
+      min-width: 120px;
+    }
+  
+    th:nth-child(3), td:nth-child(3), /* From column */
+    th:nth-child(4), td:nth-child(4) { /* To column */
+      min-width: 130px;
+    }
+  
+    th:nth-child(5), td:nth-child(5) { /* Hash column */
+      min-width: 140px;
+    }
+  
+    /* Add visual indicator for scrollable content */
+    .transactions-table::after {
+      content: '← Scroll →';
+      display: block;
+      text-align: center;
+      padding: 10px;
+      color: #8a8f98;
+      font-size: 0.8rem;
+      background: rgba(42, 42, 42, 0.8);
+      position: sticky;
+      left: 0;
+      right: 0;
+      bottom: 0;
     }
   } 

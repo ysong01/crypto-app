@@ -14,6 +14,7 @@ function Navbar() {
 
   const handleLogout = () => {
     dispatch(logout());
+    setIsMenuOpen(false);
     navigate('/');
   };
 
@@ -21,10 +22,14 @@ function Navbar() {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  const handleNavClick = () => {
+    setIsMenuOpen(false);
+  };
+
   return (
     <nav className="navbar">
       <div className="nav-brand">
-        <Link to="/">Crypto Analysis</Link>
+        <Link to="/" onClick={handleNavClick}>Crypto Analysis</Link>
       </div>
       <div className="hamburger" onClick={toggleMenu}>
         <span></span>
@@ -33,31 +38,31 @@ function Navbar() {
       </div>
       <div className={`nav-links ${isMenuOpen ? 'active' : ''}`}>
         <div className="nav-item">
-          <Link to="/">Home</Link>
+          <Link to="/" onClick={handleNavClick}>Home</Link>
           <span className="navbar-tooltip">View latest crypto trends and analysis</span>
         </div>
         
         <div className="nav-item">
-          <Link to="/compare">Compare</Link>
+          <Link to="/compare" onClick={handleNavClick}>Compare</Link>
           <span className="navbar-tooltip">Compare different cryptocurrencies</span>
         </div>
         
         {user ? (
           <>
             <div className="nav-item">
-              <Link to="/portfolio/manage">Portfolio</Link>
+              <Link to="/portfolio/manage" onClick={handleNavClick}>Portfolio</Link>
               <span className="navbar-tooltip">Manage your crypto portfolio</span>
             </div>
           </>
         ) : null}
 
         <div className="nav-item">
-          <Link to="/monitor">Monitor</Link>
+          <Link to="/monitor" onClick={handleNavClick}>Monitor</Link>
           <span className="navbar-tooltip">Real-time blockchain monitoring</span>
         </div>
 
         <div className="nav-item">
-          <Link to="/whales">Whale Tracker</Link>
+          <Link to="/whales" onClick={handleNavClick}>Whale Tracker</Link>
           <span className="navbar-tooltip">Track large cryptocurrency transactions</span>
         </div>
 
@@ -70,7 +75,7 @@ function Navbar() {
           </div>
         ) : (
           <div className="nav-item">
-            <Link to="/portfolio" className="login-btn">Login</Link>
+            <Link to="/portfolio" onClick={handleNavClick} className="login-btn">Login</Link>
             <span className="navbar-tooltip">Create an account or sign in to analyze your portfolio</span>
           </div>
         )}

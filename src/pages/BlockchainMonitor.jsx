@@ -33,6 +33,13 @@ function formatLargeNumber(num) {
   // Convert to absolute number to handle negative values
   const absNum = Math.abs(num);
   
+  // Handle small decimal values (less than 1)
+  if (absNum < 1) {
+    // Show 8 decimal places for very small numbers
+    return num.toFixed(8);
+  }
+  
+  // Handle larger numbers as before
   if (absNum >= 1e12) {
     return (num / 1e12).toFixed(2) + 'T';
   } else if (absNum >= 1e9) {
@@ -43,7 +50,8 @@ function formatLargeNumber(num) {
     return (num / 1e3).toFixed(2) + 'K';
   }
   
-  return num.toString();
+  // For numbers between 1 and 999, show 2 decimal places
+  return num.toFixed(2);
 }
 
 function getCongestionLevel(mempoolTx) {
@@ -56,6 +64,55 @@ function getCongestionColor(mempoolTx) {
   if (mempoolTx > 100000) return '#ff4444';
   if (mempoolTx > 50000) return '#ffbb33';
   return '#00C851';
+}
+
+function formatCryptoAmount(value, chain) {
+  // First log the incoming value to debug
+  console.log('Raw fee value:', value);
+  
+  // Ensure we have a valid number to work with
+  if (!value || isNaN(Number(value))) return '0';
+  
+  // Convert string to number if needed
+  const rawValue = typeof value === 'string' ? Number(value) : value;
+  
+  // Convert from base units to crypto units
+  let convertedValue;
+  switch(chain) {
+    case 'bitcoin':
+    case 'bitcoin-cash':
+    case 'litecoin':
+      // Convert from satoshis (1 BTC = 100,000,000 satoshis)
+      convertedValue = rawValue / 100000000;
+      break;
+    case 'ethereum':
+      // Convert from wei (1 ETH = 1e18 wei)
+      convertedValue = rawValue / 1000000000000000000;
+      break;
+    case 'dogecoin':
+      // Convert from koinu (1 DOGE = 100,000,000 koinu)
+      convertedValue = rawValue / 100000000;
+      break;
+    default:
+      convertedValue = rawValue;
+  }
+  
+  // Handle very small numbers with appropriate precision
+  if (convertedValue < 0.00000001) {
+    return convertedValue.toFixed(12);
+  } else if (convertedValue < 0.0000001) {
+    return convertedValue.toFixed(10);
+  } else if (convertedValue < 0.000001) {
+    return convertedValue.toFixed(8);
+  } else if (convertedValue < 0.0001) {
+    return convertedValue.toFixed(8);
+  } else if (convertedValue < 0.01) {
+    return convertedValue.toFixed(6);
+  } else if (convertedValue < 1) {
+    return convertedValue.toFixed(4);
+  } else {
+    return convertedValue.toFixed(2);
+  }
 }
 
 function BlockchainMonitor() {
@@ -337,37 +394,40 @@ function BlockchainMonitor() {
             <h3>Live Transactions</h3>
             <div className="transaction-feed">
               {liveTransactions.length > 0 ? (
-                liveTransactions.map((tx, index) => (
-                  <div key={tx.hash} className="live-tx-item">
-                    <div className="tx-header">
-                      <span className="tx-hash" title={tx.hash}>
-                        {tx.hash}
-                      </span>
-                      <span className="tx-time">
-                        {new Date(tx.time).toLocaleTimeString()}
-                      </span>
-                    </div>
-                    <div className="tx-body">
-                      <div className="tx-addresses">
-                        <span className="tx-from" title={`From: ${tx.sender}`}>
-                          From: {tx.sender}
+                liveTransactions.map((tx, index) => {
+                  console.log('Full transaction object:', tx);
+                  return (
+                    <div key={tx.hash} className="live-tx-item">
+                      <div className="tx-header">
+                        <span className="tx-hash" title={tx.hash}>
+                          {tx.hash}
                         </span>
-                        <span className="tx-arrow">→</span>
-                        <span className="tx-to" title={`To: ${tx.receiver}`}>
-                          To: {tx.receiver}
+                        <span className="tx-time">
+                          {new Date(tx.time).toLocaleTimeString()}
                         </span>
                       </div>
-                      <div className="tx-details">
-                        <span className="tx-value">
-                          {formatLargeNumber(tx.value)} {selectedChain.toUpperCase()}
-                        </span>
-                        <span className="tx-size">
-                          Size: {formatLargeNumber(tx.size)} bytes
-                        </span>
+                      <div className="tx-body">
+                        <div className="tx-addresses">
+                          <span className="tx-from" title={`From: ${tx.sender}`}>
+                            From: {tx.sender}
+                          </span>
+                          <span className="tx-arrow">→</span>
+                          <span className="tx-to" title={`To: ${tx.receiver}`}>
+                            To: {tx.receiver}
+                          </span>
+                        </div>
+                        <div className="tx-details">
+                          <span className="tx-value">
+                            Fee: {formatCryptoAmount(tx.fee, selectedChain)} {selectedChain.toUpperCase()}
+                          </span>
+                          <span className="tx-size">
+                            Size: {formatLargeNumber(tx.size)} bytes
+                          </span>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                ))
+                  );
+                })
               ) : (
                 <div className="no-transactions">
                   No live transactions available

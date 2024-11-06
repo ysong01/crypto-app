@@ -971,3 +971,221 @@
   background: #45a049;
   transform: translateY(-1px);
 }
+
+/* Update the portfolio grid layout for mobile */
+@media screen and (max-width: 768px) {
+  .portfolio-grid {
+    grid-template-columns: 1fr; /* Single column on mobile */
+    gap: 1rem;
+    padding: 1rem;
+  }
+
+  /* Center all cards and sections */
+  .portfolio-list-section,
+  .portfolio-details-section {
+    width: 100%;
+    margin: 0 auto;
+    padding: 1rem;
+  }
+
+  /* Adjust metrics grid for mobile */
+  .metrics-grid {
+    grid-template-columns: 1fr; /* Single column for metrics on mobile */
+    gap: 0.8rem;
+    padding: 0;
+  }
+
+  /* Center metric cards */
+  .metric-card {
+    width: 100%;
+    margin: 0 auto;
+    padding: 1rem;
+  }
+
+  /* Adjust holdings list */
+  .holdings-list {
+    width: 100%;
+    padding: 0;
+  }
+
+  /* Center holding cards */
+  .holding-card {
+    width: 100%;
+    margin: 0 auto 1rem auto;
+    padding: 1rem;
+  }
+
+  /* Adjust forms for mobile */
+  .create-portfolio-form,
+  .add-holding-form {
+    width: 100%;
+    padding: 1rem;
+    margin: 0 auto;
+  }
+
+  /* Center form inputs */
+  .form-group input {
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  /* Adjust portfolio items list */
+  .portfolios-list {
+    grid-template-columns: 1fr; /* Single column */
+    gap: 0.8rem;
+    padding: 0;
+    width: 100%;
+    margin: 1rem auto;
+  }
+
+  /* Center portfolio items */
+  .portfolio-item {
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  /* Adjust portfolio instructions */
+  .portfolio-instructions {
+    width: 100%;
+    margin: 1rem auto;
+    padding: 1rem;
+  }
+
+  /* Adjust headers */
+  h2, h3 {
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+
+  /* Adjust buttons */
+  button {
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  /* Fix any potential horizontal scroll */
+  .portfolio-manager {
+    max-width: 100vw;
+    overflow-x: hidden;
+  }
+}
+
+/* Additional optimization for very small screens */
+@media screen and (max-width: 380px) {
+  .portfolio-grid {
+    padding: 0.5rem;
+  }
+
+  .metric-card,
+  .holding-card,
+  .portfolio-item {
+    padding: 0.8rem;
+  }
+
+  .form-group input {
+    padding: 0.8rem;
+  }
+
+  h2 {
+    font-size: 1.3rem;
+  }
+
+  h3 {
+    font-size: 1.1rem;
+  }
+
+  h4 {
+    font-size: 1rem;
+  }
+}
+
+/* Base container styles */
+.portfolio-grid {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Mobile optimization */
+@media screen and (max-width: 768px) {
+  .portfolio-grid {
+    width: 100%;
+    padding: 10px;
+    margin: 0;
+    overflow-x: hidden; /* Prevent horizontal scroll */
+  }
+
+  .portfolio-manager {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+  }
+
+  /* Reset right-side padding/margins */
+  .portfolio-list-section,
+  .portfolio-details-section {
+    width: 100%;
+    padding: 10px;
+    margin: 0;
+  }
+
+  /* Fix metrics grid centering */
+  .metrics-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    width: 100%;
+    padding: 0;
+    margin: 0 auto;
+  }
+
+  .metric-card {
+    width: 100%;
+    margin: 0 auto;
+    box-sizing: border-box;
+  }
+
+  /* Fix holdings list centering */
+  .holdings-list {
+    width: 100%;
+    padding: 0;
+    margin: 0 auto;
+  }
+
+  .holding-card {
+    width: 100%;
+    margin: 0 0 10px 0;
+    box-sizing: border-box;
+  }
+
+  /* Fix portfolio items centering */
+  .portfolios-list {
+    width: 100%;
+    padding: 0;
+    margin: 0 auto;
+  }
+
+  .portfolio-item {
+    width: 100%;
+    margin: 0 0 10px 0;
+    box-sizing: border-box;
+  }
+
+  /* Fix form centering */
+  .add-holding-form {
+    width: 100%;
+    padding: 10px;
+    margin: 0 auto;
+    box-sizing: border-box;
+  }
+
+  .form-group {
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  /* Ensure all elements use border-box */
+  * {
+    box-sizing: border-box;
+  }
+}
