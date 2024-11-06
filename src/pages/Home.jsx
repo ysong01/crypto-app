@@ -93,7 +93,11 @@ function Home() {
           
           return (
             <Link key={crypto.code} to={`/crypto/${crypto.code}`}>
-              <div className="crypto-card">
+              <div 
+                className="crypto-card"
+                data-trend={!loading && liveData.priceChange !== undefined ? 
+                  (liveData.priceChange >= 0 ? 'positive' : 'negative') : 'neutral'}
+              >
                 <div className="crypto-header">
                   <img
                     src={`${process.env.PUBLIC_URL}/images/${crypto.logo}`}

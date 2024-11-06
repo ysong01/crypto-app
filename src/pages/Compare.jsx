@@ -1,6 +1,6 @@
 // src/pages/Compare.jsx
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import cryptocurrencies from '../cryptocurrencies';
 import './Compare.css'; // Import CSS specific to Compare page
@@ -9,6 +9,7 @@ function Compare() {
   const [selectedCryptos, setSelectedCryptos] = useState([]);
   const [cryptoData, setCryptoData] = useState([]);
   const [loading, setLoading] = useState(false);
+  const previousValues = useRef({});
 
   // Handle checkbox change
   const handleCheckboxChange = (event) => {
@@ -49,6 +50,15 @@ function Compare() {
       setCryptoData([]);
     }
   }, [selectedCryptos]);
+
+  // Check for value changes
+  const checkValueChanged = (crypto, metric, value) => {
+    const key = `${crypto}-${metric}`;
+    const prevValue = previousValues.current[key];
+    previousValues.current[key] = value;
+    
+    return prevValue !== undefined && prevValue !== value ? 'value-changed' : '';
+  };
 
   return (
     <div className="container">
@@ -107,7 +117,7 @@ function Compare() {
                   <tr key={metric}>
                     <td>{formatMetricName(metric)}</td>
                     {cryptoData.map((crypto) => (
-                      <td key={crypto.name}>
+                      <td key={crypto.name} className={checkValueChanged(crypto.name, metric, crypto.data[metric])}>
                         {crypto.data[metric]
                           ? formatValue(crypto.data[metric], metric)
                           : 'N/A'}

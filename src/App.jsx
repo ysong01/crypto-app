@@ -11,6 +11,7 @@ import PortfolioLogin from './components/Portfolio/PortfolioLogin';
 import PortfolioManager from './components/Portfolio/PortfolioManager';
 import ProtectedRoute from './components/ProtectedRoute';
 import BlockchainMonitor from './pages/BlockchainMonitor';
+import WhaleTracker from './pages/WhaleTracker';
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
           } 
         />
         <Route path="/monitor" element={<BlockchainMonitor />} />
+        <Route path="/whales" element={<WhaleTracker />} />
       </Routes>
       <Chatbot />
     </Router>

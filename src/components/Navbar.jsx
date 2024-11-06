@@ -56,6 +56,11 @@ function Navbar() {
           <span className="navbar-tooltip">Real-time blockchain monitoring</span>
         </div>
 
+        <div className="nav-item">
+          <Link to="/whales">Whale Tracker</Link>
+          <span className="navbar-tooltip">Track large cryptocurrency transactions</span>
+        </div>
+
         {user ? (
           <div className="nav-item">
             <button onClick={handleLogout} className="logout-btn">

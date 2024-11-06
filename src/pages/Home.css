@@ -19,11 +19,16 @@
   border: 1px solid #3a3f4b;
   color: white;
   text-decoration: none;
+  position: relative;
 }
 
 .crypto-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.crypto-card:hover::after {
+  animation: gradientMove 2s ease infinite;
 }
 
 .crypto-header {
@@ -212,4 +217,104 @@ a {
   display: none !important;
   visibility: hidden !important;
   opacity: 0 !important;
+}
+
+/* Add the gradient animation keyframes if not already present */
+@keyframes gradientMove {
+  0% { background-position: 100% 0; }
+  100% { background-position: -100% 0; }
+}
+
+/* Add the animated gradient border effect */
+.crypto-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 12px;
+  padding: 1px;
+  background: linear-gradient(90deg, 
+    #4CAF50, 
+    #66bb6a,
+    #81c784, 
+    transparent
+  );
+  background-size: 200% 100%;
+  animation: gradientMove 3s ease infinite;
+  -webkit-mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  pointer-events: none;
+}
+
+/* Update hover effect to work with the gradient */
+.crypto-card:hover::after {
+  animation: gradientMove 2s ease infinite;
+}
+
+/* Add multiple gradient animations with different speeds */
+@keyframes gradientMove1 {
+  0% { background-position: 100% 0; }
+  100% { background-position: -100% 0; }
+}
+
+@keyframes gradientMove2 {
+  0% { background-position: -100% 0; }
+  100% { background-position: 100% 0; }
+}
+
+@keyframes gradientMove3 {
+  0% { background-position: 50% 0; }
+  100% { background-position: -150% 0; }
+}
+
+/* Define color gradients for positive and negative changes */
+.crypto-card[data-trend="positive"]::after {
+  background: linear-gradient(90deg, 
+    #4CAF50, 
+    #66bb6a,
+    #81c784, 
+    transparent
+  );
+}
+
+.crypto-card[data-trend="negative"]::after {
+  background: linear-gradient(90deg, 
+    #ff4d4d, 
+    #ff6666,
+    #ff8080, 
+    transparent
+  );
+}
+
+/* Update the crypto card styles with conditional colors */
+.crypto-card:nth-child(3n+1)::after {
+  background-size: 200% 100%;
+  animation: gradientMove1 5s ease-in-out infinite;
+}
+
+.crypto-card:nth-child(3n+2)::after {
+  background-size: 200% 100%;
+  animation: gradientMove2 7s ease-in-out infinite;
+}
+
+.crypto-card:nth-child(3n+3)::after {
+  background-size: 200% 100%;
+  animation: gradientMove3 6s ease-in-out infinite;
+}
+
+/* Update hover effects with faster animations */
+.crypto-card:nth-child(3n+1):hover::after {
+  animation: gradientMove1 3s ease-in-out infinite;
+}
+
+.crypto-card:nth-child(3n+2):hover::after {
+  animation: gradientMove2 4s ease-in-out infinite;
+}
+
+.crypto-card:nth-child(3n+3):hover::after {
+  animation: gradientMove3 3.5s ease-in-out infinite;
 }

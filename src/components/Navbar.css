@@ -37,6 +37,8 @@
   border-radius: 4px;
   cursor: pointer;
   font-size: 16px;
+  font-family: 'Poppins', sans-serif;
+  transition: all 0.3s ease;
 }
 
 .logout-btn:hover {
@@ -51,6 +53,8 @@
   border-radius: 4px;
   text-decoration: none;
   font-size: 16px;
+  font-family: 'Poppins', sans-serif;
+  transition: all 0.3s ease;
 }
 
 .login-btn:hover {
@@ -121,6 +125,7 @@
   color: white;
   border-radius: 4px;
   transition: all 0.2s ease;
+  font-family: 'Poppins', sans-serif;
 }
 
 .nav-item a:hover {

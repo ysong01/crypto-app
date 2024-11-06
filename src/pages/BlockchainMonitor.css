@@ -740,3 +740,127 @@
   .monitor-header h1:hover::after {
     width: 100%;
   }
+  
+  /* Add gradient animation keyframes */
+  @keyframes gradientMove {
+    0% { background-position: 100% 0; }
+    100% { background-position: -100% 0; }
+  }
+  
+  /* Add gradient to Network Health title */
+  .network-stats h2::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 60px;
+    height: 2px;
+    background: linear-gradient(90deg, 
+      #4CAF50, 
+      #66bb6a,
+      #81c784, 
+      transparent
+    );
+    background-size: 200% 100%;
+    animation: gradientMove 8s ease infinite;
+  }
+  
+  /* Add gradient to section titles */
+  .velocity-metrics h3::after,
+  .network-trends h3::after,
+  .transaction-stats h3::after,
+  .transactions h3::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 60px;
+    height: 2px;
+    background: linear-gradient(90deg, 
+      #4CAF50, 
+      #66bb6a,
+      #81c784, 
+      transparent
+    );
+    background-size: 200% 100%;
+    animation: gradientMove 8s ease infinite;
+  }
+  
+  /* Add gradient border to stat items */
+  .stat-item {
+    position: relative;
+    border: none;
+  }
+  
+  .stat-item::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 8px;
+    padding: 1px;
+    background: linear-gradient(90deg, 
+      #4CAF50, 
+      #66bb6a,
+      #81c784, 
+      transparent
+    );
+    background-size: 200% 100%;
+    animation: gradientMove 8s ease infinite;
+    -webkit-mask: 
+      linear-gradient(#fff 0 0) content-box, 
+      linear-gradient(#fff 0 0);
+    mask: 
+      linear-gradient(#fff 0 0) content-box, 
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+  
+  /* Add gradient to live transaction items */
+  .live-tx-item {
+    position: relative;
+    border: none;
+  }
+  
+  .live-tx-item::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 8px;
+    padding: 1px;
+    background: linear-gradient(90deg, 
+      #4CAF50, 
+      #66bb6a,
+      #81c784, 
+      transparent
+    );
+    background-size: 200% 100%;
+    animation: gradientMove 8s ease infinite;
+    -webkit-mask: 
+      linear-gradient(#fff 0 0) content-box, 
+      linear-gradient(#fff 0 0);
+    mask: 
+      linear-gradient(#fff 0 0) content-box, 
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+  
+  /* Vary animation speeds for different elements */
+  .stat-item:nth-child(2n)::before {
+    animation-duration: 10s;
+  }
+  
+  .stat-item:nth-child(3n)::before {
+    animation-duration: 12s;
+  }
+  
+  .live-tx-item:nth-child(2n)::before {
+    animation-duration: 9s;
+  }
+  
+  .live-tx-item:nth-child(3n)::before {
+    animation-duration: 11s;
+  }
