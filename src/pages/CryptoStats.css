@@ -256,4 +256,196 @@
 
 .crypto-card.ratio .metric-header .title::after {
   background: linear-gradient(90deg, #FF9800, #FFC107);
-} 
+}
+
+/* Add these styles at the end of your file */
+
+/* Chart container styling */
+.chart-container {
+  background: linear-gradient(145deg, #1a1d23, #2a2d35);
+  border-radius: 12px;
+  padding: 40px;
+  margin: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  min-height: 800px;
+  display: flex;
+  flex-direction: column;
+}
+
+.chart-container h3 {
+  color: #8a8f98;
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+/* TradingView widget container styling */
+.tradingview-widget-container {
+  height: 650px;
+  width: 100%;
+  margin: 20px 0;
+}
+
+.tradingview-widget-container > div {
+  height: 100% !important;
+  width: 100% !important;
+}
+
+/* More specific selectors */
+.container .chart-container {
+  background: linear-gradient(145deg, #1a1d23, #2a2d35);
+  border-radius: 18px;
+  padding: 15px;
+  margin: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  height: 350px !important;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.container .chart-container h3 {
+  color: #8a8f98;
+  font-size: 1.2rem;
+  margin-bottom: 2px;
+  padding-bottom: 2px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  flex-shrink: 0;
+  height: 20px;
+}
+
+.container .chart-container .tradingview-widget-container {
+  flex: 1;
+  width: 100%;
+  min-height: 500px;
+  margin: 0;
+}
+
+.container .chart-container .tradingview-widget-container > div {
+  height: 100% !important;
+  width: 100% !important;
+}
+
+/* Specific tooltip styling for CryptoStats page */
+.container .card-grid .crypto-card {
+  position: relative;
+  overflow: visible;
+}
+
+.container .card-grid .crypto-card .tooltip {
+  visibility: hidden;
+  position: absolute;
+  left: 50%;
+  bottom: 100%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.9);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  white-space: normal;
+  width: 200px;
+  text-align: center;
+  z-index: 1000;
+  opacity: 0;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  pointer-events: none;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 10px;
+}
+
+/* Position the tooltip on hover */
+.container .card-grid .crypto-card:hover .tooltip {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Arrow styling for CryptoStats tooltips */
+.container .card-grid .crypto-card .tooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: rgba(0, 0, 0, 0.9) transparent transparent transparent;
+}
+
+/* Specific styles for CryptoStats page cards and tooltips */
+.container .card-grid .crypto-card {
+  position: relative;
+  overflow: visible !important; /* Override any other overflow settings */
+}
+
+.container .card-grid .crypto-card .tooltip {
+  visibility: hidden;
+  position: absolute;
+  left: 50%;
+  bottom: 100%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.9);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  white-space: normal;
+  width: 200px;
+  text-align: center;
+  z-index: 1000;
+  opacity: 0;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  pointer-events: none;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 10px;
+}
+
+/* Add this to specifically target home page cards */
+.home-page .crypto-card {
+  position: relative;
+  overflow: hidden !important; /* Force overflow hidden for home page cards */
+}
+
+/* Position the tooltip on hover for stats page */
+.container .card-grid .crypto-card:hover .tooltip {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Arrow styling for CryptoStats tooltips */
+.container .card-grid .crypto-card .tooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: rgba(0, 0, 0, 0.9) transparent transparent transparent;
+}
+
+/* Specific styles for home page cards */
+.home-page .card-grid .crypto-card {
+  position: relative;
+  overflow: hidden !important; /* Force overflow hidden */
+}
+
+.home-page .card-grid .crypto-card > * {
+  overflow: hidden !important; /* Force overflow hidden on all direct children */
+}
+
+.home-page .card-grid .crypto-card .inner-content {
+  position: relative;
+  width: 100%;
+  overflow: hidden !important;
+}
+
+/* Keep the stats page styles */
+.container .card-grid .crypto-card {
+  position: relative;
+  overflow: visible !important;
+}
+
+
+

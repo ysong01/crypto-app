@@ -41,11 +41,13 @@ function CryptoCard({ title, value }) {
 
   return (
     <div className={`crypto-card ${cardType}`}>
-      <div className="metric-header">
-        <h3 className="title">{title}</h3>
-        <div className="tooltip">{getTooltip(title)}</div>
+      <div className="inner-content">
+        <div className="metric-header">
+          <h3 className="title">{title}</h3>
+          <div className="tooltip">{getTooltip(title)}</div>
+        </div>
+        <div className="value">{value}</div>
       </div>
-      <div className="value">{value}</div>
     </div>
   );
 }

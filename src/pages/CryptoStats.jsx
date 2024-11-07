@@ -6,7 +6,8 @@ import CryptoCard from '../components/CryptoCard';
 import axios from 'axios';
 import cryptocurrencies from '../cryptocurrencies';
 import TradingViewWidget from '../components/TradingViewWidget';
-import SentimentAnalysis from '../components/SentimentAnalysis'; // Import the SentimentAnalysis component
+import SentimentAnalysis from '../components/SentimentAnalysis';
+import './CryptoStats.css';
 
 function CryptoStats() {
   const { name } = useParams();
