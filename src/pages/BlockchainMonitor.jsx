@@ -25,7 +25,7 @@ ChartJS.register(
 );
 
 const API_BASE_URL = 'https://stingray-app-prmsm.ondigitalocean.app';
-const SUPPORTED_CHAINS = ['bitcoin', 'ethereum', 'bitcoin-cash', 'litecoin', 'dogecoin'];
+const SUPPORTED_CHAINS = ['bitcoin', 'bitcoin-cash', 'litecoin', 'dogecoin'];
 
 function formatLargeNumber(num) {
   if (!num) return '0';
