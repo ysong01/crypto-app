@@ -10,6 +10,7 @@ function Compare() {
   const [cryptoData, setCryptoData] = useState([]);
   const [loading, setLoading] = useState(false);
   const previousValues = useRef({});
+  const tableRef = useRef(null);
 
   // Handle checkbox change
   const handleCheckboxChange = (event) => {
@@ -60,6 +61,25 @@ function Compare() {
     return prevValue !== undefined && prevValue !== value ? 'value-changed' : '';
   };
 
+  // Add scroll indicator
+  useEffect(() => {
+    const table = tableRef.current;
+    if (!table) return;
+
+    const checkScroll = () => {
+      const isScrollable = table.scrollWidth > table.clientWidth;
+      table.classList.toggle('is-scrollable', isScrollable);
+    };
+
+    // Check on mount and when data changes
+    checkScroll();
+    
+    // Check on window resize
+    window.addEventListener('resize', checkScroll);
+    
+    return () => window.removeEventListener('resize', checkScroll);
+  }, [cryptoData]);
+
   return (
     <div className="container">
       <h2>Compare Cryptocurrencies</h2>
@@ -86,7 +106,7 @@ function Compare() {
         </div>
         {loading && <p>Loading data...</p>}
         {cryptoData.length > 0 && (
-          <div className="comparison-table">
+          <div className="comparison-table" ref={tableRef}>
             <table>
               <thead>
                 <tr>
