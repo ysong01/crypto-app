@@ -119,62 +119,56 @@
 /* Comparison table styling */
 .comparison-table {
   overflow-x: auto;
+  max-width: 100%;
   background: #2a2d35;
-  border-radius: 10px;
-  padding: 20px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 0;
+  position: relative;
 }
 
+/* Basic cell styling */
+.comparison-table th,
+.comparison-table td {
+  background: #2a2d35;
+  padding: 15px;
+  text-align: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  border-right: 1px solid rgba(255, 255, 255, 0.05);
+  min-width: 150px;
+  box-sizing: border-box;
+}
+
+/* First column styling - explicitly remove sticky */
+.comparison-table th:first-child,
+.comparison-table td:first-child {
+  position: static !important; /* Force override any other positioning */
+  text-align: left;
+  color: #8a8f98;
+  background: #1a1d23;
+  z-index: auto;
+  box-shadow: none;
+}
+
+/* Table structure */
 .comparison-table table {
+  min-width: 800px;
   width: 100%;
   border-collapse: separate;
   border-spacing: 0;
-  color: #fff;
 }
 
-.comparison-table th,
-.comparison-table td {
-  padding: 15px;
-  text-align: center;
-  border-bottom: 1px solid #454545;
-}
-
-.comparison-table th {
-  background: #1a1d23;
+/* Header styling */
+.comparison-table thead th {
+  background: #1a1d23 !important;
   font-weight: 600;
-  position: sticky;
-  top: 0;
-  z-index: 10;
 }
 
-.comparison-table th:first-child {
-  border-top-left-radius: 8px;
-}
-
-.comparison-table th:last-child {
-  border-top-right-radius: 8px;
-}
-
+/* Hover effects */
 .comparison-table tr:hover td {
   background: #323642;
 }
 
-.comparison-table td:first-child {
-  font-weight: 500;
-  color: #8a8f98;
-  text-align: left;
-}
-
-.comparison-table img {
-  width: 32px;
-  height: 32px;
-  object-fit: contain;
-  margin-bottom: 8px;
-  transition: transform 0.3s ease;
-}
-
-.comparison-table th:hover img {
-  transform: scale(1.1);
+.comparison-table tr:hover td:first-child {
+  background: #1e2128;
 }
 
 /* Loading state */
@@ -751,6 +745,7 @@
   z-index: 20;
   /* Improved shadow with no harsh edge */
   box-shadow: 6px 0 8px -5px rgba(0, 0, 0, 0.3);
+  transform: translateZ(0); /* Force GPU acceleration */
 }
 
 /* Fix for header cells */
@@ -763,186 +758,69 @@
 
 /* Fix for the first header cell (corner) */
 .comparison-table thead th:first-child {
-  z-index: 30;
+  position: sticky;
+  left: 0;
+  top: 0;
+  z-index: 30; /* Higher z-index to stay on top */
+  background: #1a1d23 !important;
   /* Improved shadow for corner cell */
   box-shadow: 
     6px 0 8px -5px rgba(0, 0, 0, 0.3),
     0 6px 8px -5px rgba(0, 0, 0, 0.3);
 }
 
-/* Fix for cells when scrolling */
-.comparison-table tbody tr:hover td {
-  background: #323642;
+/* Ensure proper background for first column cells on hover */
+.comparison-table tr:hover td:first-child {
+  background: #1a1d23;
 }
 
-.comparison-table tbody tr:hover td:first-child {
-  background: #1e2128;
-}
-
-/* Ensure clean borders */
-.comparison-table table {
-  border-collapse: separate;
-  border-spacing: 0;
-}
-
-/* Add subtle cell borders */
-.comparison-table td,
-.comparison-table th {
-  border-right: 1px solid rgba(255, 255, 255, 0.05);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-/* Remove right border from last cell in each row */
-.comparison-table td:last-child,
-.comparison-table th:last-child {
-  border-right: none;
-}
-  
-/* Fix right edge cutoff */
+/* Fix table container */
 .comparison-table {
-  overflow-x: auto;
-  max-width: 100%;
-  -webkit-overflow-scrolling: touch;
   position: relative;
-  padding: 0 1px; /* Add slight padding to prevent edge cutoff */
-}
-
-/* Ensure last column displays fully */
-.comparison-table th:last-child,
-.comparison-table td:last-child {
-  padding-right: 20px; /* Add extra padding on the right */
-  position: relative; /* For proper background rendering */
+  overflow-x: auto;
   background: #2a2d35;
 }
 
-/* Fix table width calculation */
+/* Ensure proper stacking context */
 .comparison-table table {
-  width: auto; /* Let table expand naturally */
-  min-width: 100%; /* Ensure it fills container */
-  margin-right: 1px; /* Prevent edge bleeding */
+  position: relative;
+  z-index: 1;
+}
+  
+/* Remove the problematic gradient overlay */
+.comparison-table::after {
+  display: none; /* Remove the gradient overlay completely */
 }
 
-/* Improve column width consistency */
+/* Clean up table edges */
+.comparison-table {
+  overflow-x: auto;
+  max-width: 100%;
+  background: #2a2d35;
+  padding: 0;  /* Remove padding that might cause edge issues */
+  position: relative;
+}
+
+/* Ensure consistent column styling */
 .comparison-table th,
 .comparison-table td {
-  min-width: 150px; /* Ensure minimum column width */
+  background: #2a2d35;
+  padding: 15px;
+  text-align: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  border-right: 1px solid rgba(255, 255, 255, 0.05);
+  min-width: 150px;
   box-sizing: border-box;
 }
 
-/* First column can be smaller */
-.comparison-table th:first-child,
-.comparison-table td:first-child {
-  min-width: 120px;
+/* Clean up last column */
+.comparison-table th:last-child,
+.comparison-table td:last-child {
+  border-right: none; /* Remove right border from last column */
 }
 
-/* Remove any existing right-side shadows or gradients */
-.comparison-table::after {
+/* Remove any scroll indicators or shadows */
+.comparison-table.is-scrollable::after {
   display: none;
-}
-
-/* Ensure clean right edge on hover */
-.comparison-table tr:hover td:last-child {
-  background: #323642;
-}
-  
-/* Ensure consistent header background color */
-.comparison-table thead th {
-  position: sticky;
-  top: 0;
-  background: #1a1d23 !important; /* Force consistent dark background for all header cells */
-  z-index: 10;
-}
-
-/* Ensure hover states don't affect header background */
-.comparison-table tr:hover th {
-  background: #1a1d23 !important;
-}
-
-/* Specific fix for last header cell */
-.comparison-table thead th:last-child {
-  background: #1a1d23 !important;
-  border-right: none;
-}
-  
-/* Performance optimizations */
-.comparison-table {
-  overflow-x: auto;
-  max-width: 100%;
-  -webkit-overflow-scrolling: touch;
-  position: relative;
-  padding: 0 1px;
-  will-change: transform; /* Hint for browser optimization */
-  transform: translateZ(0); /* Force GPU acceleration */
-}
-
-/* Optimize sticky columns */
-.comparison-table th:first-child,
-.comparison-table td:first-child {
-  position: sticky;
-  left: 0;
-  background: #1a1d23;
-  z-index: 20;
-  /* Simplified shadow */
-  box-shadow: 4px 0 4px -2px rgba(0, 0, 0, 0.2);
-  transform: translateZ(0);
-}
-
-/* Optimize transitions */
-.checkbox-label {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 10px;
-  background: #1a1d23;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: transform 0.2s ease, background-color 0.2s ease;
-  will-change: transform;
-  transform: translateZ(0);
-}
-
-.checkbox-label:hover {
-  transform: translateY(-2px) translateZ(0);
-  background: #2a2d35;
-}
-
-/* Optimize table hover effects */
-.comparison-table tr td {
-  transition: background-color 0.2s ease;
-  will-change: background-color;
-  backface-visibility: hidden;
-}
-
-/* Remove expensive box-shadows and gradients from non-essential elements */
-.compare-content {
-  background: #1a1d23;
-  border-radius: 12px;
-  padding: 25px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-/* Optimize scrollbar */
-.comparison-table::-webkit-scrollbar {
-  height: 8px;
-  width: 8px;
-}
-
-.comparison-table::-webkit-scrollbar-track {
-  background: rgba(26, 29, 35, 0.3);
-}
-
-.comparison-table::-webkit-scrollbar-thumb {
-  background: #00bcd4;
-  border-radius: 4px;
-}
-
-/* Remove gradient animations */
-.container h2::after {
-  transition: width 0.2s ease;
-}
-
-/* Optimize checkbox animations */
-.checkbox-label input[type="checkbox"] {
-  transition: background-color 0.2s ease, border-color 0.2s ease;
 }
   

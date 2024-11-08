@@ -209,6 +209,29 @@ a {
   .crypto-card {
     padding: 15px;
   }
+
+  .crypto-header h3 {
+    font-size: 0.9rem;
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
+    line-height: 1.2;
+    max-width: calc(100% - 55px);
+  }
+
+  .name-price-change {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+  }
+
+  .price-change {
+    position: static;
+    width: auto;
+    font-size: 0.75rem;
+    padding: 1px 4px;
+    margin-left: 0;
+  }
 }
 
 /* More specific selectors to disable tooltips on home page */
